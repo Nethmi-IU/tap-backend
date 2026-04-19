@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Firebase setup
-const serviceAccount = require('./tap-logs-project-firebase-adminsdk-fbsvc-28ceba6faa.json');
+const serviceAccount = require('./tap-logs-project-firebase-adminsdk-fbsvc-94562c1324.json');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
