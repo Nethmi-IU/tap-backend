@@ -9,7 +9,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-const serviceAccount = require('./serviceAccountKey.json');
+const serviceAccount = require('./tap-logs-project-firebase-adminsdk-fbsvc-28ceba6faa.json');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
