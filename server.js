@@ -5,12 +5,10 @@ const cors = require('cors');
 
 const app = express();
 
-// Middleware
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// Firebase setup
 const serviceAccount = require('./serviceAccountKey.json');
 
 admin.initializeApp({
@@ -19,14 +17,6 @@ admin.initializeApp({
 
 const db = admin.firestore();
 
-
-// ✅ ROOT ROUTE (ADD HERE)
-app.get('/', (req, res) => {
-  res.send("Backend is running 🚀");
-});
-
-
-// ✅ MAIN API ROUTE
 app.post('/saveTaps', async (req, res) => {
   try {
     const sessionId = req.body.id;
@@ -37,8 +27,8 @@ app.post('/saveTaps', async (req, res) => {
       const t = JSON.parse(tap);
 
       await db.collection('tap_logs').add({
-        sessionId: sessionId,
-        device: device,
+        sessionId,
+        device,
         tapSequence: t.tapSequenceNumber,
         start: t.startTimestamp,
         end: t.endTimestamp,
@@ -49,14 +39,10 @@ app.post('/saveTaps', async (req, res) => {
     }
 
     res.send("Data saved successfully");
-
   } catch (err) {
     console.error(err);
     res.status(500).send("Error saving data");
   }
 });
 
-
-// ✅ IMPORTANT: USE RENDER PORT
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log("Server running on " + PORT));
+app.listen(3000, () => console.log("Server running"));
